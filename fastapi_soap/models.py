@@ -1,4 +1,4 @@
-from typing import Generic, Optional, TypeVar
+from typing import Generic, Optional, TypeVar, Union
 
 from pydantic_xml import BaseGenericXmlModel, BaseXmlModel, element
 
@@ -53,7 +53,7 @@ class FaultResponse(BodyContent, tag='Fault'):
 
 
 BodyContentType = TypeVar(
-    'BodyContentType', bound=BodyContent | FaultResponse | BaseXmlModel
+    'BodyContentType', bound=Union[BodyContent, FaultResponse, BaseXmlModel]
 )
 """Generic type for body content. Accepts a BodyContent or a FaultResponse"""
 

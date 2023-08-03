@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Union
 
 from fastapi import Response
 from pydantic_xml import BaseXmlModel
@@ -51,7 +51,7 @@ class SoapResponse(Response):
         self._envelope_wrap = envelope_wrap
         super().__init__(*args, **kwargs)
 
-    def render(self, content: Any) -> str | bytes:
+    def render(self, content: Any) -> Union[str, bytes]:
         if isinstance(content, BaseXmlModel):
             if not self._envelope_wrap:
                 return content.to_xml(encoding='UTF-8', standalone=True)
